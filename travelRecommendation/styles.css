@@ -103,7 +103,7 @@
 
   section {
     width: 100%;
-    min-height: 100vh; 
+    min-height: 80vh; 
     padding: 60px 40px;
     display: flex;
     flex-direction: column;
@@ -116,19 +116,31 @@
   
   /* Home Section */
   .home-container {
-    /* display: block; */
+    display: flex;
     justify-content: center;
     align-items: center;
     padding: 40px;
     background-color: #f9f9f9;
-    flex-wrap: wrap;
+    opacity: 0.8;
+    text-align: center;
+    position: relative;
   }
   
   .home-info {
     max-width: 600px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .h2-headings {
+    font-size: 40px;
+    margin: 0px 40px 40px 40px;
+    text-align: center;
   }
   
   .home-info button {
+    justify-content: center;
+    display: center;
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #007bff;
@@ -144,8 +156,17 @@
   
   .icons {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute; 
+    right: 40px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+  }
+
+  .icons a {
+    display: block;
+    margin-bottom: 10px;
   }
   
   .icons img {
@@ -156,17 +177,24 @@
   
   /* About Section */
   .about-container {
+    justify-content: center;
+    text-align: center;
     padding: 40px;
     background-color: #ffffff;
   }
   
   .team-container {
-    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+
   }
   
   .cards-container {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    text-align: center;
+    gap: 50px;
     flex-wrap: wrap;
     margin-top: 20px;
   }
@@ -221,4 +249,8 @@
   .aside textarea {
     height: 100px;
     resize: none;
+  }
+
+  .aside button {
+    margin-top: 30p
   }

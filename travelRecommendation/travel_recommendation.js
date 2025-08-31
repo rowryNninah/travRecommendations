@@ -1,11 +1,11 @@
 let jsonData = {};
 
 fetch("travel_recommendation_api.json")
-  .then(response => response.json())
-  .then(data => {
-    jsonData = data;
-  })
-  .catch(error => console.error("Error fetching data:", error));
+    .then(response => response.json())
+    .then(data => {
+        jsonData = data;
+    })
+    .catch(error => console.error("Error fetching data:", error));
 
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
@@ -16,53 +16,54 @@ const templesContainer = document.getElementById("temples-container");
 const beachesContainer = document.getElementById("beaches-container");
 
 function display(container, title, image, description) {
-  const card = document.createElement("div");
-  card.className = "items-card";
-  card.innerHTML = `
+    const card = document.createElement("div");
+    card.className = "items-card";
+    card.innerHTML = `
     <h3>${title}</h3>
     <img src="${image}" alt="${title}">
     <p>${description}</p>
   `;
-  container.appendChild(card);
+    container.appendChild(card);
 }
 
 searchBtn.addEventListener("click", (event) => {
-  event.preventDefault(); 
+    event.preventDefault();
+    countryContainer.innerHTML = "";
+    templesContainer.innerHTML = "";
+    beachesContainer.innerHTML = "";
 
 
-  const query = searchInput.value.trim().toLowerCase();
+    const query = searchInput.value.trim().toLowerCase();
 
 
-  let results = false;
+    let results = false;
 
-  if (query === "beach" || query === "beaches") {
-    if (jsonData.beaches) {
-      jsonData.beaches.slice(0, 2).forEach(beach => {
-        display(beachesContainer, beach.name, beach.imageUrl, beach.description);
-      });
-      results = true;
-    }
-  } else if (query === "temple" || query === "temples") {
-    if (jsonData.temples) {
-      jsonData.temples.slice(0, 2).forEach(temple => {
-        display(templesContainer, temple.name, temple.imageUrl, temple.description);
-      });
-      results = true;
-    }
-  } else if (query === "country" || (jsonData.countries && jsonData.countries.some(c => c.name.toLowerCase().includes(query)))) {
-    if (jsonData.countries) {
-      let found = false;
-      jsonData.countries.forEach(country => {
-        if (country.name.toLowerCase().includes(query) || query === "country") {
-          country.cities.slice(0, 2).forEach(city => {
-            display(countryContainer, city.name, city.imageUrl, city.description);
-          });
-          found = true;
+    if (query === "beach" || query === "beaches") {
+        if (jsonData.beaches) {
+            jsonData.beaches.slice(0, 2).forEach(beach => {
+                display(beachesContainer, beach.name, beach.imageUrl, beach.description);
+            });
+            results = true;
         }
-      });
-      results = found;
+    } else if (query === "temple" || query === "temples") {
+        if (jsonData.temples) {
+            jsonData.temples.slice(0, 2).forEach(temple => {
+                display(templesContainer, temple.name, temple.imageUrl, temple.description);
+            });
+            results = true;
+        }
+    } else if (query === "country" || (jsonData.countries && jsonData.countries.some(c => c.name.toLowerCase().includes(query)))) {
+        if (jsonData.countries) {
+            jsonData.countries.forEach(country => {
+                if (country.name.toLowerCase().includes(query) || query === "country") {
+                    country.cities.slice(0, 2).forEach(city => {
+                        display(countryContainer, city.name, city.imageUrl, city.description);
+                    });
+                }
+            });
+            results = true;
+        }
     }
-  }
 })
 
 clearBtn.addEventListener("click", () => {
@@ -70,4 +71,4 @@ clearBtn.addEventListener("click", () => {
     countryContainer.innerHTML = "";
     templesContainer.innerHTML = "";
     beachesContainer.innerHTML = "";
-  });
+});

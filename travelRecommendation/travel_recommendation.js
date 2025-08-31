@@ -2,7 +2,9 @@ let jsonData = {};
 
 fetch("travel_recommendation_api.json")
   .then(response => response.json())
-  .then(data => { jsonData = data; })
+  .then(data => {
+    jsonData = data;
+  })
   .catch(error => console.error("Error fetching data:", error));
 
 const searchInput = document.getElementById("search-input");
@@ -25,58 +27,47 @@ function display(container, title, image, description) {
 }
 
 searchBtn.addEventListener("click", (event) => {
-  event.preventDefault(); // prevent form refresh
+  event.preventDefault(); 
+
 
   const query = searchInput.value.trim().toLowerCase();
 
-  countryContainer.innerHTML = "";
-  templesContainer.innerHTML = "";
-  beachesContainer.innerHTML = "";
 
   let results = false;
 
-  // Search in countries -> cities
-  if (jsonData.countries) {
-    jsonData.countries.forEach(country => {
-      if (country.cities) {
-        country.cities.forEach(city => {
-          if (city.name.toLowerCase().includes(query)) {
-            display(templesContainer, city.name, city.imageUrl, city.description);
-            results = true;
-          }
-        });
-      }
-    });
-  }
-
-  // Search in temples
-  if (jsonData.temples) {
-    jsonData.temples.forEach(temple => {
-      if (temple.name.toLowerCase().includes(query)) {
-        display(templesContainer, temple.name, temple.imageUrl, temple.description);
-        results = true;
-      }
-    });
-  }
-
-  // Search in beaches
-  if (jsonData.beaches) {
-    jsonData.beaches.forEach(beach => {
-      if (beach.name.toLowerCase().includes(query)) {
+  if (query === "beach" || query === "beaches") {
+    if (jsonData.beaches) {
+      jsonData.beaches.slice(0, 2).forEach(beach => {
         display(beachesContainer, beach.name, beach.imageUrl, beach.description);
-        results = true;
-      }
-    });
+      });
+      results = true;
+    }
+  } else if (query === "temple" || query === "temples") {
+    if (jsonData.temples) {
+      jsonData.temples.slice(0, 2).forEach(temple => {
+        display(templesContainer, temple.name, temple.imageUrl, temple.description);
+      });
+      results = true;
+    }
+  } else if (query === "country" || (jsonData.countries && jsonData.countries.some(c => c.name.toLowerCase().includes(query)))) {
+    if (jsonData.countries) {
+      let found = false;
+      jsonData.countries.forEach(country => {
+        if (country.name.toLowerCase().includes(query) || query === "country") {
+          country.cities.slice(0, 2).forEach(city => {
+            display(countryContainer, city.name, city.imageUrl, city.description);
+          });
+          found = true;
+        }
+      });
+      results = found;
+    }
   }
-
-  if (!results) {
-    templesContainer.innerHTML = "<p>No results found.</p>";
-  }
-});
+})
 
 clearBtn.addEventListener("click", () => {
-  searchInput.value = "";
-  countryContainer.innerHTML = "";
-  templesContainer.innerHTML = "";
-  beachesContainer.innerHTML = "";
-});
+    searchInput.value = "";
+    countryContainer.innerHTML = "";
+    templesContainer.innerHTML = "";
+    beachesContainer.innerHTML = "";
+  });

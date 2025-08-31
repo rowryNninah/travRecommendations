@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Travel</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
-  <header>
-    <div class="nav-bar">
-      <div class="logo">
-        <img src="images/logo.png" alt="All Things Travel logo" />
-        <h1>Travels</h1>
-      </div>
-
-      <nav>
-        <ul>
-          <li><a href="travel_recommendation.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="contacts.html">Contact Us</a></li>
-        </ul>
-      </nav>
-
-      <form>
-        <input type="text" placeholder="Search..." />
-        <button type="submit">Search</button>
-        <button type="reset">Clear</button>
-      </form>
-    </div>
-  </header>
-
-  <main>
-    <section>
-      <div class="home-container">
-        <div class="home-info">
-          <h2 class="h2-headings">Explore the world with us!</h2>
-          <p>From iconic skylines to hidden urban gems, our travel guides bring you the best of every city. Discover trendy cafés, must-see landmarks, vibrant nightlife, and local secrets that make each destination unforgettable. Whether you're planning your first trip or your next adventure, we’ll help you craft the perfect journey full of fun, culture, and memories you'll treasure.</p>
-          <button type="button">Book Now</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="nav-bar">
+        <div class="logo">
+          <img src="images/logo.png" alt="All Things Travel logo" />
+          <h1>Travels</h1>
         </div>
-
-        <div class="icons">
-          <a href="#"><img src="images/facebook.png" alt="Facebook" /></a>
-          <a href="#"><img src="images/x.png" alt="Twitter" /></a>
-          <a href="#"><img src="images/instagram.png" alt="Instagram" /></a>
-        </div>
+        <nav>
+          <ul>
+            <li><a href="travel_recommendation.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contacts.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <form>
+          <input type="text" placeholder="Search..." id="search-input" />
+          <button type="submit" id="search-btn">Search</button>
+          <button type="reset" id="clear-btn">Clear</button>
+        </form>
       </div>
-
-      <div class="recommendations" id="recommendations"></div>
-    </section>
-  </main>
-
-</body>
+    </header>
+    <main>
+      <section>
+        <div class="home-container">
+          <div class="home-info">
+            <h2 class="h2-headings">Explore the world with us!</h2>
+            <p>
+              From iconic skylines to hidden urban gems, our travel guides bring
+              you the best of every city. Discover trendy cafés, must-see
+              landmarks, vibrant nightlife, and local secrets that make each
+              destination unforgettable. Whether you're planning your first trip
+              or your next adventure, we’ll help you craft the perfect journey
+              full of fun, culture, and memories you'll treasure.
+            </p>
+            <button type="button">Book Now</button>
+          </div>
+          <div class="icons">
+            <a href="#"><img src="images/facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="images/x.png" alt="Twitter" /></a>
+            <a href="#"><img src="images/instagram.png" alt="Instagram" /></a>
+          </div>
+        </div>
+        <div class="recommendations" id="recommendations">
+          <div class="countries-container" id="countries-container"></div>
+          <div class="temples-container" id="temples-container"></div>
+          <div class="beaches-container" id="beaches-container"></div>
+        </div>
+      </section>
+      <script src="travel_recommendation.js"></script>
+    </main>
+  </body>
 </html>
